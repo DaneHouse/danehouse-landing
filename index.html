@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaneHouse AI — AI Systems for Contractors</title>
+  <meta name="description" content="AI-powered websites and agents for Altadena contractors. Stop missing calls. Start closing jobs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0b0f;
+      --bg-raised: #12121a;
+      --bg-card: #16161f;
+      --bg-card-hover: #1c1c28;
+      --border: #1e1e2a;
+      --border-bright: #2a2a3a;
+      --text: #e8e6e1;
+      --text-dim: #8a8892;
+      --text-faint: #5a5866;
+      --accent: #c87941;
+      --accent-bright: #e8944d;
+      --accent-glow: rgba(200, 121, 65, 0.15);
+      --accent-glow-strong: rgba(200, 121, 65, 0.3);
+      --green: #4a9e6d;
+      --red: #c0584e;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ═══════ NAV ═══════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(11, 11, 15, 0.8);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 0.75rem 2rem;
+      background: rgba(11, 11, 15, 0.95);
+    }
+
+    .nav-logo {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--bg);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: all 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-bright) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ═══════ HERO ═══════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 121, 65, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 121, 65, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(74, 158, 109, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(200, 121, 65, 0.2);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-bright);
+      margin-bottom: 2rem;
+      letter-spacing: 0.03em;
+      animation: fadeUp 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-tag .pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow-strong); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px transparent; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.15s forwards;
+      opacity: 0;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent-bright);
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s ease 0.45s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow-strong);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid var(--border-bright);
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-dim);
+      background: var(--bg-raised);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.8s ease 0.6s forwards;
+      opacity: 0;
+    }
+
+    .hero-stat-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══════ SECTIONS ═══════ */
+    section {
+      padding: 7rem 2rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--accent-bright); }
+
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ═══════ PROBLEM ═══════ */
+    .problem {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      align-items: start;
+    }
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .problem-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .problem-item:hover {
+      border-color: var(--red);
+      background: rgba(192, 88, 78, 0.05);
+    }
+
+    .problem-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: rgba(192, 88, 78, 0.1);
+      border: 1px solid rgba(192, 88, 78, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--red);
+    }
+
+    .problem-text {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .problem-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .problem-callout {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 121, 65, 0.05) 100%);
+      border: 1px solid var(--border-bright);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .problem-callout-number {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--accent-bright);
+      margin-bottom: 0.75rem;
+    }
+
+    .problem-callout-text {
+      font-size: 1.3rem;
+      color: var(--text);
+      line-height: 1.4;
+      font-weight: 300;
+    }
+
+    .problem-callout-sub {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
+    }
+
+    /* ═══════ SERVICES ═══════ */
+    .services {
+      border-top: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .service-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.25rem;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-card:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--border-bright);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card:hover .service-number { color: var(--accent); transition: color 0.35s; }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-result {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: rgba(74, 158, 109, 0.06);
+      border: 1px solid rgba(74, 158, 109, 0.12);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--green);
+    }
+
+    /* ═══════ PRICING ═══════ */
+    .pricing {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .price-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .price-card:hover {
+      border-color: var(--border-bright);
+    }
+
+    .price-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, rgba(200, 121, 65, 0.06) 0%, var(--bg-raised) 40%);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: -12px;
+      right: 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+    }
+
+    .price-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .price-amount {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .price-dollar {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .price-setup {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .price-features li .check {
+      color: var(--green);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .price-card .btn-primary { width: 100%; justify-content: center; }
+    .price-card .btn-secondary { width: 100%; justify-content: center; }
+
+    .pricing-footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .pricing-footer strong { color: var(--text); }
+
+    /* ═══════ ROI ═══════ */
+    .roi {
+      border-top: 1px solid var(--border);
+    }
+
+    .roi-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .roi-header .section-desc { margin: 0 auto; }
+
+    .roi-highlight {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .roi-highlight em {
+      font-style: italic;
+      color: var(--accent-bright);
+    }
+
+    .roi-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .roi-column { padding: 0; }
+
+    .roi-column-header {
+      padding: 1.25rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .roi-column:first-child .roi-column-header {
+      background: rgba(192, 88, 78, 0.08);
+      color: var(--red);
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .roi-column:last-child .roi-column-header {
+      background: rgba(74, 158, 109, 0.08);
+      color: var(--green);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .roi-item {
+      padding: 1.1rem 2rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .roi-column:first-child .roi-item {
+      border-right: 1px solid var(--border);
+    }
+
+    .roi-item:last-child { border-bottom: none; }
+
+    .roi-item .icon { font-size: 0.85rem; flex-shrink: 0; }
+
+    /* ═══════ TESTIMONIALS ═══════ */
+    .testimonials {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.25rem;
+    }
+
+    .testimonial-stars {
+      color: var(--accent);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      line-height: 1.6;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ═══════ FAQ ═══════ */
+    .faq {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 1.5rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: var(--accent-bright); }
+
+    .faq-chevron {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-chevron { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ═══════ FINAL CTA ═══════ */
+    .final-cta {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 2rem;
+    }
+
+    .final-cta-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 50% 100%, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .final-cta .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .final-cta .section-title {
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+
+    .final-cta .section-desc {
+      max-width: 500px;
+      margin: 0 auto 1rem;
+    }
+
+    .final-cta-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .final-cta-list li {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .final-cta-list li .check { color: var(--accent-bright); }
+
+    .final-cta-note {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      margin-top: 1.5rem;
+    }
+
+    /* ═══════ FOOTER ═══════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .footer-left strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      font-style: italic;
+    }
+
+    /* ═══════ SCROLL ANIMATIONS ═══════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ═══════ MOBILE NAV ═══════ */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    /* ═══════ RESPONSIVE ═══════ */
+    @media (max-width: 900px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: 1.5rem; }
+      .roi-table { grid-template-columns: 1fr; }
+      .roi-column:first-child .roi-item { border-right: none; }
+      .roi-column:first-child .roi-column-header { border-right: none; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(11, 11, 15, 0.98);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .mobile-toggle { display: block; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 5rem 1.25rem; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .service-card { padding: 1.75rem; }
+      .price-card { padding: 1.75rem; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <span class="logo-mark">D</span>
+      DaneHouse
+    </a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#roi">ROI</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#audit" class="nav-cta">Free AI Audit</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="pulse"></span>
+        Now serving Altadena-area contractors
+      </div>
+      <h1>Stop Missing Calls.<br>Start <em>Closing</em> Jobs.</h1>
+      <p class="hero-sub">AI-powered systems for contractors who are too busy on the job site to answer the phone. We set it up. You close more deals.</p>
+      <div class="hero-actions">
+        <a href="#audit" class="btn-primary">Get Your Free AI Audit &rarr;</a>
+        <a href="#services" class="btn-secondary">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-number">30-40%</div>
+          <div class="hero-stat-label">of calls missed while on job sites</div>
+        </div>
+        <div>
+          <div class="hero-stat-number">24+ hrs</div>
+          <div class="hero-stat-label">average response time to quote requests</div>
+        </div>
+        <div>
+          <div class="hero-stat-number">$15-50K</div>
+          <div class="hero-stat-label">average fire recovery job value</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">The Problem</span>
+        <h2 class="section-title">You're Leaving <em>Money</em> on the Table</h2>
+        <p class="section-desc">Every missed call is a lost job. Every slow email response pushes a customer to your competitor.</p>
+      </div>
+      <div class="problem-grid">
+        <ul class="problem-list reveal reveal-delay-1">
+          <li class="problem-item">
+            <div class="problem-icon">&#x2715;</div>
+            <div class="problem-text"><strong>Missing 30-40% of incoming calls</strong> while on job sites. That's thousands in lost revenue every month.</div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">&#x29D6;</div>
+            <div class="problem-text"><strong>Taking 24+ hours to respond</strong> to quote requests. Your competitor responds in 5 minutes.</div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">&#x2753;</div>
+            <div class="problem-text"><strong>Losing track of leads.</strong> No system for follow-ups. Hot prospects go cold.</div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">&#x23F1;</div>
+            <div class="problem-text"><strong>Spending 10+ hours a week</strong> on scheduling and emails instead of doing the actual work.</div>
+          </li>
+        </ul>
+        <div class="problem-callout reveal reveal-delay-2">
+          <div class="problem-callout-number">7,000+</div>
+          <div class="problem-callout-text">homes destroyed in the Eaton Fire. $12B+ in reconstruction.</div>
+          <div class="problem-callout-sub">Contractors are booked solid for the next 18-24 months. You don't need to hire a secretary. <strong style="color:var(--accent-bright)">You need AI.</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">What We Build</span>
+        <h2 class="section-title">AI Systems That <em>Work</em> For You</h2>
+        <p class="section-desc">We set everything up. You check a dashboard once a day. That's it.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-number">01</div>
+          <h3>AI Email Receptionist</h3>
+          <p>Every inquiry gets an instant, professional response. Appointments get booked. Leads get captured. You get a daily summary of who reached out.</p>
+          <div class="service-result">&#x2713; Never miss another lead. Ever.</div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-number">02</div>
+          <h3>Custom AI Agents</h3>
+          <p>Automatic quote generation from photos. 3-day follow-up sequences. Project status updates to customers. Lead scoring that filters out tire-kickers.</p>
+          <div class="service-result">&#x2713; Your best leads rise to the top.</div>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-number">03</div>
+          <h3>AI Website Management</h3>
+          <p>A professional, mobile-friendly website that updates itself. New project photos get added. Testimonials get rotated. Lead forms feed directly into your AI receptionist.</p>
+          <div class="service-result">&#x2713; Look professional. Close more jobs.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+        <span class="section-label">Pricing</span>
+        <h2 class="section-title">Simple Pricing. <em>Real</em> ROI.</h2>
+        <p class="section-desc" style="margin:0 auto;">One extra closed job per month pays for the entire system. Most contractors see that in week one.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal reveal-delay-1">
+          <div class="price-name">Starter</div>
+          <div class="price-desc">For contractors who want to stop missing leads.</div>
+          <div class="price-amount">
+            <span class="price-dollar">$1,500</span>
+            <span class="price-period">/month</span>
+          </div>
+          <div class="price-setup">$2,500 one-time setup</div>
+          <ul class="price-features">
+            <li><span class="check">&#x2713;</span> AI Email Receptionist</li>
+            <li><span class="check">&#x2713;</span> 2 Custom AI Agents (your choice)</li>
+            <li><span class="check">&#x2713;</span> Daily lead briefing</li>
+            <li><span class="check">&#x2713;</span> Setup in 2-5 days</li>
+            <li><span class="check">&#x2713;</span> 30-day money-back guarantee</li>
+          </ul>
+          <a href="#audit" class="btn-secondary">Get Started &rarr;</a>
+        </div>
+        <div class="price-card featured reveal reveal-delay-2">
+          <div class="price-badge">Most Popular</div>
+          <div class="price-name">Professional</div>
+          <div class="price-desc">The full system. Everything automated.</div>
+          <div class="price-amount">
+            <span class="price-dollar">$1,900</span>
+            <span class="price-period">/month</span>
+          </div>
+          <div class="price-setup">$4,500 one-time setup</div>
+          <ul class="price-features">
+            <li><span class="check">&#x2713;</span> Everything in Starter</li>
+            <li><span class="check">&#x2713;</span> AI Website (built in 3-5 days)</li>
+            <li><span class="check">&#x2713;</span> Weekly website updates</li>
+            <li><span class="check">&#x2713;</span> Local SEO optimization</li>
+            <li><span class="check">&#x2713;</span> Monthly performance optimization</li>
+          </ul>
+          <a href="#audit" class="btn-primary">Get Started &rarr;</a>
+        </div>
+      </div>
+      <div class="pricing-footer reveal">
+        <strong>Both plans include:</strong> Setup in 2-5 days. 30-day money-back guarantee. Monthly optimization.
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="roi" id="roi">
+    <div class="container">
+      <div class="roi-header reveal">
+        <span class="section-label">The Math</span>
+        <h2 class="section-title">The ROI Is <em>Obvious</em></h2>
+      </div>
+      <div class="roi-highlight reveal">Average fire recovery job: <em>$15,000 &mdash; $50,000</em></div>
+      <div class="roi-table reveal">
+        <div class="roi-column">
+          <div class="roi-column-header">&#x2715;&ensp;Without AI</div>
+          <div class="roi-item"><span class="icon">&#x26A0;</span> Miss 30% of incoming calls</div>
+          <div class="roi-item"><span class="icon">&#x26A0;</span> 24+ hour response time</div>
+          <div class="roi-item"><span class="icon">&#x26A0;</span> No follow-up system</div>
+          <div class="roi-item"><span class="icon">&#x26A0;</span> Forget which leads are hot</div>
+          <div class="roi-item"><span class="icon">&#x26A0;</span> No professional website</div>
+        </div>
+        <div class="roi-column">
+          <div class="roi-column-header">&#x2713;&ensp;With DaneHouse AI</div>
+          <div class="roi-item"><span class="icon" style="color:var(--green)">&#x2713;</span> Every call answered instantly</div>
+          <div class="roi-item"><span class="icon" style="color:var(--green)">&#x2713;</span> Instant email responses</div>
+          <div class="roi-item"><span class="icon" style="color:var(--green)">&#x2713;</span> Automatic 3-day follow-ups</div>
+          <div class="roi-item"><span class="icon" style="color:var(--green)">&#x2713;</span> Lead scoring dashboard</div>
+          <div class="roi-item"><span class="icon" style="color:var(--green)">&#x2713;</span> Updated website with gallery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Trusted By</span>
+        <h2 class="section-title">Built for <em>Altadena</em> Contractors</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">"I was losing 2-3 jobs a week because I couldn't get back to people fast enough. Now every lead gets a response in under a minute."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">&#x1F477;</div>
+            <div>
+              <div class="testimonial-name">Coming Soon</div>
+              <div class="testimonial-role">General Contractor, Altadena</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-quote">"The AI handles my scheduling, my follow-ups, even my quote requests. I just show up and do the work."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">&#x1F528;</div>
+            <div>
+              <div class="testimonial-name">Coming Soon</div>
+              <div class="testimonial-role">Roofing Contractor, Pasadena</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="faq-grid">
+        <div class="reveal">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title">Questions? <em>Answered.</em></h2>
+          <p class="section-desc">Everything you need to know before getting started.</p>
+        </div>
+        <div class="faq-list reveal reveal-delay-1">
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              Do I need to be tech-savvy?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>No. We set everything up. You check a dashboard once a day. That's it.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              How long does setup take?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>2-5 days depending on the package. We handle everything from configuration to testing to launch.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              What if it doesn't work?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>30-day money-back guarantee. If you don't get at least 3 qualified leads from the system in the first month, full refund. No questions asked.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              Can I try just one service?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>Yes. Most contractors start with the AI Email Receptionist and add agents later as they see results.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              Do you work with contractors outside Altadena?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>We're starting with Altadena and Pasadena area contractors, but expanding soon. If you're nearby, reach out — we'd love to chat.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="audit">
+    <div class="final-cta-bg"></div>
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Get Started</span>
+        <h2 class="section-title">Free AI Audit &mdash; <em>15 Minutes</em></h2>
+        <p class="section-desc" style="margin:0 auto;">Let us look at your current lead intake process and show you exactly where you're losing money.</p>
+      </div>
+      <ul class="final-cta-list reveal reveal-delay-1">
+        <li><span class="check">&#x2713;</span> How many leads you're probably missing</li>
+        <li><span class="check">&#x2713;</span> Where your response time is costing you jobs</li>
+        <li><span class="check">&#x2713;</span> What one extra closed job per month means for your revenue</li>
+      </ul>
+      <div class="reveal reveal-delay-2">
+        <a href="mailto:dane@danehouse.io?subject=Free AI Audit Request" class="btn-primary" style="font-size:1.1rem;padding:1.15rem 2.5rem;">Book Your Free AI Audit &rarr;</a>
+        <p class="final-cta-note">Currently available for Altadena-area contractors. Limited spots this week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>DaneHouse AI</strong> &middot; Altadena, CA
+      </div>
+      <div class="footer-right">Helping contractors work smarter, not harder.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
