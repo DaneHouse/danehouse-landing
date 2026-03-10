@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaneHouse — Pricing</title>
+  <meta name="description" content="AI infrastructure pricing for small businesses. Custom agents, dashboards, and operations built for how you work.">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0e;
+      --bg-raised: #111116;
+      --bg-card: #15151b;
+      --border: #1c1c24;
+      --border-bright: #28283a;
+      --text: #e8e6e1;
+      --text-dim: #7a7888;
+      --text-faint: #4a4858;
+      --accent: #c9b98a;
+      --accent-dim: rgba(201, 185, 138, 0.12);
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #fff;
+      color: #000;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 14, 0.85);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 0.6rem 2.5rem;
+      background: rgba(10, 10, 14, 0.95);
+    }
+
+    .nav-logo {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo .logo-mark {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: invert(1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+
+    .nav-cta {
+      background: #ffffff !important;
+      color: #0a0a0e !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: all 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: #e8e6e1 !important;
+      transform: translateY(-1px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    /* HERO */
+    .pricing-hero {
+      padding: 10rem 2rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .pricing-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-hero h1 em {
+      font-style: italic;
+    }
+
+    .pricing-hero p {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* PLANS GRID */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .plan {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+
+    .plan:hover {
+      background: var(--bg-raised);
+    }
+
+    .plan.featured {
+      background: #0e0d14;
+    }
+
+    .plan.featured:hover {
+      background: #131220;
+    }
+
+    .featured-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .plan-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .plan-tagline {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .plan-setup {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-faint);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+    }
+
+    .plan-setup strong {
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .plan-price {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .plan.featured .plan-price {
+      color: var(--accent);
+    }
+
+    .plan-price sup {
+      font-size: 1.25rem;
+      vertical-align: super;
+    }
+
+    .plan-period {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+      margin-bottom: 2rem;
+    }
+
+    .plan-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-features {
+      list-style: none;
+    }
+
+    .plan-features li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      line-height: 1.5;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plan-features li:last-child {
+      border-bottom: none;
+    }
+
+    .plan-features li::before {
+      content: '\2014';
+      color: var(--text-faint);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+
+    .plan.featured .plan-features li::before {
+      color: var(--accent);
+      opacity: 0.5;
+    }
+
+    /* ADDONS */
+    .addons-section {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .addons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .addon {
+      background: var(--bg);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .addon:hover {
+      background: var(--bg-raised);
+    }
+
+    .addon-info h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .addon-info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .addon-pricing {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .addon-setup {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-faint);
+      margin-bottom: 0.15rem;
+    }
+
+    .addon-monthly {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    /* GUARANTEE */
+    .guarantee {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 2rem 2.5rem;
+      margin-bottom: 4rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .guarantee-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .guarantee p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .guarantee p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .final-cta h2 em { font-style: italic; }
+
+    .final-cta p {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 420px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.25rem;
+      background: #ffffff;
+      color: #0a0a0e;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary:hover {
+      background: #e8e6e1;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.08);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-left strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--text-faint);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .plans { grid-template-columns: 1fr; }
+      .addons-grid { grid-template-columns: 1fr; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 14, 0.98);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .mobile-toggle { display: block; }
+    }
+
+    @media (max-width: 600px) {
+      .pricing-hero { padding: 7rem 1.25rem 3rem; }
+      .container { padding: 0 1.25rem; }
+      .final-cta { padding: 4rem 1.25rem; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .guarantee { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-mark"><img src="assets/logo.png" alt="DaneHouse"></span>
+      DaneHouse
+    </a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="index.html#capabilities">Capabilities</a></li>
+      <li><a href="index.html#approach">Approach</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="https://cal.com/danehouse/15min" target="_blank" class="nav-cta">Schedule a Call</a></li>
+    </ul>
+  </nav>
+
+  <!-- PRICING HERO -->
+  <div class="pricing-hero">
+    <h1>AI infrastructure.<br><em>Built for your business.</em></h1>
+    <p>Every system is custom. Every agent has a job. You get a Command Center that runs the parts of your business you shouldn't have to.</p>
+  </div>
+
+  <!-- PLANS -->
+  <div class="container">
+    <span class="section-label">Plans</span>
+
+    <div class="plans">
+      <!-- STARTER -->
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-tagline">Your AI command center, up and running.</div>
+        <div class="plan-setup">One-time setup <strong>$949</strong></div>
+        <div class="plan-price"><sup>$</sup>497</div>
+        <div class="plan-period">/ month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Command Center dashboard</li>
+          <li>Standard AI agent team</li>
+          <li>Live KPIs & activity feed</li>
+          <li>Lead intake & routing</li>
+          <li>Automated follow-up sequences</li>
+          <li>30-day onboarding support</li>
+        </ul>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-tagline">Custom agents built around how you actually work.</div>
+        <div class="plan-setup">One-time setup <strong>$1,497</strong></div>
+        <div class="plan-price"><sup>$</sup>797</div>
+        <div class="plan-period">/ month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Starter</li>
+          <li>Custom AI agents for your workflows</li>
+          <li>Job & cost tracking</li>
+          <li>Change order capture</li>
+          <li>Smart dispatch & scheduling</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-tagline">The full stack. Agents, voice, website — everything on.</div>
+        <div class="plan-setup">One-time setup <strong>$2,449</strong></div>
+        <div class="plan-price"><sup>$</sup>1,197</div>
+        <div class="plan-period">/ month</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Everything in Pro</li>
+          <li>AI Voice Receptionist (24/7)</li>
+          <li>Professional website included</li>
+          <li>ROI calculator & proposal pages</li>
+          <li>Full agent team — voice, email, ops</li>
+          <li>Dedicated account management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ADDONS -->
+    <div class="addons-section">
+      <span class="section-label">Add-ons</span>
+      <div class="addons-grid">
+        <div class="addon">
+          <div class="addon-info">
+            <h4>AI Voice Receptionist</h4>
+            <p>Answers missed calls 24/7. Books appointments, dispatches emergencies, texts follow-ups. Forward your existing number — zero disruption.</p>
+          </div>
+          <div class="addon-pricing">
+            <div class="addon-setup">+ $0 setup</div>
+            <div class="addon-monthly">$197/mo</div>
+          </div>
+        </div>
+        <div class="addon">
+          <div class="addon-info">
+            <h4>Professional Website</h4>
+            <p>Mobile-first, SEO-optimized, lead capture built in. Connects directly to your AI agents and dashboard.</p>
+          </div>
+          <div class="addon-pricing">
+            <div class="addon-setup">$497 setup</div>
+            <div class="addon-monthly">$97/mo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUARANTEE -->
+    <div class="guarantee">
+      <div class="guarantee-label">30-day</div>
+      <p><strong>If your system isn't live and working within 30 days, you don't pay.</strong> We build it, we run it, we stand behind it. No technical knowledge required on your end — ever.</p>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Ready to <em>talk?</em></h2>
+      <p>15 minutes. We'll learn about your business and show you what's possible.</p>
+      <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:1.1rem 2.5rem;">Schedule a Conversation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="assets/logo.png" alt="DaneHouse" style="width:18px;height:18px;object-fit:contain;filter:invert(1);vertical-align:middle;margin-right:8px;">
+        <strong>DaneHouse</strong>
+      </div>
+      <div class="footer-right">Los Angeles, CA</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
