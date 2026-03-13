@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DaneHouse — AI Infrastructure for Small Business</title>
-  <meta name="description" content="We design, build, and operate AI systems for small businesses.">
+  <title>DaneHouse — AI Consulting & Systems for Business</title>
+  <meta name="description" content="AI consulting for businesses. We audit your operations, design the right AI strategy, and build the systems that save you time and money.">
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,8 @@
       --text: #e8e6e1;
       --text-dim: #7a7888;
       --text-faint: #4a4858;
+      --accent: #c9b98a;
+      --accent-dim: rgba(201, 185, 138, 0.12);
       --font-display: 'Instrument Serif', Georgia, serif;
       --font-body: 'DM Sans', -apple-system, sans-serif;
     }
@@ -45,7 +47,7 @@
       color: #000;
     }
 
-    /* ═══════ NAV ═══════ */
+    /* NAV */
     nav {
       position: fixed;
       top: 0;
@@ -127,7 +129,7 @@
       transform: translateY(-1px);
     }
 
-    /* ═══════ HERO ═══════ */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -172,23 +174,35 @@
       opacity: 0;
     }
 
-    .hero h1 em {
-      font-style: italic;
-    }
+    .hero h1 em { font-style: italic; }
 
     .hero-sub {
       font-size: 1.15rem;
       color: var(--text-dim);
-      max-width: 480px;
-      margin: 0 auto 3rem;
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
       line-height: 1.7;
       animation: fadeUp 1s ease 0.5s forwards;
+      opacity: 0;
+    }
+
+    .hero-beer {
+      font-size: 1.35rem;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-style: italic;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s ease 0.6s forwards;
       opacity: 0;
     }
 
     .hero-cta {
       animation: fadeUp 1s ease 0.7s forwards;
       opacity: 0;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     @keyframes fadeUp {
@@ -242,7 +256,7 @@
       border-color: var(--text-dim);
     }
 
-    /* ═══════ DIVIDER ═══════ */
+    /* DIVIDER */
     .divider {
       width: 1px;
       height: 80px;
@@ -250,7 +264,7 @@
       margin: 0 auto;
     }
 
-    /* ═══════ SECTIONS ═══════ */
+    /* SECTIONS */
     section {
       padding: 7rem 2rem;
       position: relative;
@@ -288,12 +302,227 @@
       line-height: 1.7;
     }
 
-    /* ═══════ CAPABILITIES ═══════ */
-    .capabilities {
+    /* HOW IT WORKS */
+    .how-it-works {
       border-top: 1px solid var(--border);
     }
 
-    .cap-grid {
+    .hiw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .hiw-step {
+      position: relative;
+    }
+
+    .hiw-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      color: var(--border-bright);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      transition: color 0.4s ease;
+    }
+
+    .hiw-step:hover .hiw-num {
+      color: var(--accent);
+    }
+
+    .hiw-step h3 {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hiw-step p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* SERVICES */
+    .services {
+      border-top: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin-top: 4rem;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* OpenClaw standalone card */
+    .openclaw-card {
+      margin-top: 1.5rem;
+      background: var(--bg);
+      border: 1px solid rgba(201, 185, 138, 0.25);
+      border-radius: 12px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      transition: background 0.4s ease;
+    }
+
+    .openclaw-card:hover {
+      background: var(--bg-raised);
+      border-color: rgba(201, 185, 138, 0.4);
+    }
+
+    .openclaw-content .service-tag {
+      background: rgba(201, 185, 138, 0.15);
+      color: var(--accent);
+    }
+
+    .openclaw-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .openclaw-content p {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .openclaw-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .openclaw-features li {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .openclaw-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .openclaw-badge {
+      background: var(--accent-dim);
+      border: 1px solid rgba(201, 185, 138, 0.15);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .openclaw-badge .badge-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .openclaw-badge .badge-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .openclaw-badge .badge-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      background: var(--accent);
+      color: #0a0a0e;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-accent:hover {
+      background: #ddd0a8;
+      transform: translateY(-1px);
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 2.5rem;
+      transition: background 0.4s ease;
+      position: relative;
+    }
+
+    .service-card:hover {
+      background: var(--bg-raised);
+    }
+
+    .service-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* WHO IT'S FOR */
+    .who {
+      border-top: 1px solid var(--border);
+    }
+
+    .who-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
@@ -304,84 +533,35 @@
       overflow: hidden;
     }
 
-    .cap-card {
+    .who-card {
       background: var(--bg);
       padding: 2.5rem;
       transition: background 0.4s ease;
-      position: relative;
     }
 
-    .cap-card:hover {
+    .who-card:hover {
       background: var(--bg-raised);
     }
 
-    .cap-number {
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      color: var(--text-faint);
-      margin-bottom: 2rem;
+    .who-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
-    .cap-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-
-    .cap-card p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-
-    /* ═══════ APPROACH ═══════ */
-    .approach {
-      border-top: 1px solid var(--border);
-    }
-
-    .approach-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 4rem;
-    }
-
-    .step {
-      position: relative;
-    }
-
-    .step-num {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      color: var(--border-bright);
-      line-height: 1;
-      margin-bottom: 1.5rem;
-      transition: color 0.4s ease;
-    }
-
-    .step:hover .step-num {
-      color: var(--text-faint);
-    }
-
-    .step h3 {
+    .who-card h3 {
       font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
     }
 
-    .step p {
-      font-size: 0.88rem;
+    .who-card p {
+      font-size: 0.85rem;
       color: var(--text-dim);
       line-height: 1.7;
     }
 
-    /* ═══════ FAQ ═══════ */
+    /* FAQ */
     .faq {
       border-top: 1px solid var(--border);
     }
@@ -446,7 +626,7 @@
       line-height: 1.7;
     }
 
-    /* ═══════ FINAL CTA ═══════ */
+    /* FINAL CTA */
     .final-cta {
       border-top: 1px solid var(--border);
       text-align: center;
@@ -459,11 +639,19 @@
     }
 
     .final-cta .section-desc {
-      max-width: 420px;
-      margin: 0 auto 2.5rem;
+      max-width: 460px;
+      margin: 0 auto 1rem;
     }
 
-    /* ═══════ FOOTER ═══════ */
+    .final-cta .beer-line {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: 3rem 2rem;
@@ -492,9 +680,20 @@
     .footer-right {
       font-size: 0.8rem;
       color: var(--text-faint);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
     }
 
-    /* ═══════ SCROLL ANIMATIONS ═══════ */
+    .footer-right a {
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--text-dim); }
+
+    /* SCROLL ANIMATIONS */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -510,7 +709,7 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* ═══════ MOBILE NAV ═══════ */
+    /* MOBILE NAV */
     .mobile-toggle {
       display: none;
       background: none;
@@ -521,10 +720,12 @@
       padding: 0.25rem;
     }
 
-    /* ═══════ RESPONSIVE ═══════ */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
-      .cap-grid { grid-template-columns: 1fr; }
-      .approach-steps { grid-template-columns: 1fr; gap: 2rem; }
+      .hiw-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .openclaw-card { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
       .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
 
       .nav-links { display: none; }
@@ -548,6 +749,7 @@
       .hero { padding: 7rem 1.25rem 4rem; }
       .hero h1 { font-size: 2.5rem; }
       .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-right { flex-direction: column; gap: 0.5rem; }
       .reveal { opacity: 1 !important; transform: none !important; }
     }
   </style>
@@ -562,11 +764,11 @@
     </a>
     <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
     <ul class="nav-links">
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#who">Who It's For</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="https://cal.com/danehouse/15min" target="_blank" class="nav-cta">Schedule a Call</a></li>
+      <li><a href="https://cal.com/danehouse/15min" target="_blank" class="nav-cta">Buy Me a Beer</a></li>
     </ul>
   </nav>
 
@@ -574,66 +776,127 @@
   <section class="hero">
     <div class="hero-line"></div>
     <div class="hero-content">
-      <h1>AI infrastructure<br>for <em>small business</em></h1>
-      <p class="hero-sub">We design, build, and operate custom AI systems that run the parts of your business you shouldn't have to.</p>
+      <h1>Your business,<br><em>powered by AI</em></h1>
+      <p class="hero-sub">I'll audit your operations and show you exactly where AI can save you 10+ hours a week. Then I'll build the system.</p>
+      <p class="hero-beer">Cost of entry? Buy me a beer.</p>
       <div class="hero-cta">
-        <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-primary">Schedule a Conversation</a>
+        <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-primary">Book a Strategy Session</a>
+        <a href="#services" class="btn-ghost">See What I Build</a>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- CAPABILITIES -->
-  <section class="capabilities" id="capabilities">
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="process">
     <div class="container">
       <div class="reveal">
-        <span class="section-label">Capabilities</span>
-        <h2 class="section-title">What we <em>build</em></h2>
-        <p class="section-desc">Every system is designed around your business. Not a template.</p>
+        <span class="section-label">Process</span>
+        <h2 class="section-title">How it <em>works</em></h2>
+        <p class="section-desc">Every engagement starts with understanding your business. Not selling you a product.</p>
       </div>
-      <div class="cap-grid reveal reveal-delay-1">
-        <div class="cap-card">
-          <div class="cap-number">01</div>
-          <h3>AI Agents</h3>
-          <p>Custom agents that handle lead response, scheduling, follow-ups, and administrative workflows autonomously.</p>
+      <div class="hiw-grid">
+        <div class="hiw-step reveal reveal-delay-1">
+          <div class="hiw-num">01</div>
+          <h3>Discover</h3>
+          <p>We sit down for a strategy session. I learn your business, map your workflows, and find where you're losing time and money. You walk away with a clear AI roadmap — whether you hire me or not.</p>
         </div>
-        <div class="cap-card">
-          <div class="cap-number">02</div>
-          <h3>Intelligent Websites</h3>
-          <p>Websites that do more than display information. They qualify leads, book appointments, and feed your pipeline.</p>
+        <div class="hiw-step reveal reveal-delay-2">
+          <div class="hiw-num">02</div>
+          <h3>Design</h3>
+          <p>I scope the right system for your needs. Could be a voice agent, a chat assistant, workflow automation, or a full agent infrastructure. No cookie-cutter solutions.</p>
         </div>
-        <div class="cap-card">
-          <div class="cap-number">03</div>
-          <h3>Operations Dashboard</h3>
-          <p>A single view of everything your AI systems are doing. Leads, conversations, revenue impact, agent performance.</p>
+        <div class="hiw-step reveal reveal-delay-3">
+          <div class="hiw-num">03</div>
+          <h3>Deploy</h3>
+          <p>I build it, launch it, and monitor it. You get a dashboard to see everything in real time. I stay on to optimize, maintain, and evolve the system as your business grows.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- APPROACH -->
-  <section class="approach" id="approach">
+  <!-- SERVICES -->
+  <section class="services" id="services">
     <div class="container">
       <div class="reveal">
-        <span class="section-label">Approach</span>
-        <h2 class="section-title">How we <em>work</em></h2>
+        <span class="section-label">Services</span>
+        <h2 class="section-title">What I <em>build</em></h2>
+        <p class="section-desc">Every system starts with a consulting conversation. These are the tools I deploy based on what your business actually needs.</p>
       </div>
-      <div class="approach-steps">
-        <div class="step reveal reveal-delay-1">
-          <div class="step-num">01</div>
-          <h3>Discovery</h3>
-          <p>We learn your business, your workflows, and where the bottlenecks are. A 15-minute conversation is all it takes to start.</p>
+      <!-- OpenClaw -->
+      <div class="openclaw-card reveal reveal-delay-1">
+        <div class="openclaw-content">
+          <span class="service-tag">OpenClaw</span>
+          <h3>Full AI Agent Infrastructure</h3>
+          <p>Your own team of AI agents — working 24/7 on content, research, outreach, operations, and anything else you throw at them. Managed through a live command center dashboard.</p>
+          <ul class="openclaw-features">
+            <li>Multi-agent AI team</li>
+            <li>Command center dashboard</li>
+            <li>Automated content generation</li>
+            <li>Lead research & outreach</li>
+            <li>Scheduled cron operations</li>
+            <li>Custom integrations & APIs</li>
+            <li>Real-time monitoring</li>
+            <li>Ongoing optimization</li>
+          </ul>
         </div>
-        <div class="step reveal reveal-delay-2">
-          <div class="step-num">02</div>
-          <h3>Build</h3>
-          <p>We design and deploy your AI system. Agents, integrations, dashboard. Typically live within one week.</p>
+        <div class="openclaw-badge">
+          <div class="badge-label">Premium</div>
+          <div class="badge-title">The whole operation, automated.</div>
+          <div class="badge-desc">This is what I run for my own business — 8 agents, 30 scheduled jobs, one dashboard. I'll build yours from scratch.</div>
+          <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-accent">Book a Strategy Session</a>
         </div>
-        <div class="step reveal reveal-delay-3">
-          <div class="step-num">03</div>
-          <h3>Operate</h3>
-          <p>We monitor, optimize, and evolve your system over time. You focus on running your business.</p>
+      </div>
+
+      <div class="services-grid reveal reveal-delay-2">
+        <div class="service-card">
+          <span class="service-tag">Consulting</span>
+          <h3>AI Strategy Sessions</h3>
+          <p>A deep dive into your operations. I identify automation opportunities, design an AI roadmap, and show you the ROI before you spend a dollar on implementation.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Voice</span>
+          <h3>AI Receptionist</h3>
+          <p>A voice agent that answers your calls 24/7, qualifies leads, books appointments, and routes emergencies. Never miss a customer again.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Automation</span>
+          <h3>Workflow Systems</h3>
+          <p>Connected automations that eliminate manual work. CRM integrations, follow-up sequences, lead routing, reporting — all running without you.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Chat</span>
+          <h3>AI Chat Assistant</h3>
+          <p>A smart chatbot on your website that answers questions, qualifies leads, and books appointments 24/7. Trained on your business — not generic responses.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="who" id="who">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label">Who It's For</span>
+        <h2 class="section-title">Built for people<br>who <em>run things</em></h2>
+      </div>
+      <div class="who-grid reveal reveal-delay-1">
+        <div class="who-card">
+          <div class="who-icon">&#9881;</div>
+          <h3>Business Owners</h3>
+          <p>You know AI matters but don't know where to start. I'll audit your business and show you exactly what to automate first.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">&#9889;</div>
+          <h3>Entrepreneurs & Creators</h3>
+          <p>You're doing everything yourself. AI agents can handle your content, outreach, scheduling, and admin — so you can focus on growth.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">&#9878;</div>
+          <h3>Teams & Companies</h3>
+          <p>You need an AI system custom-built for your workflows. Not a SaaS tool with features you'll never use — a system designed around how you actually operate.</p>
         </div>
       </div>
     </div>
@@ -650,52 +913,59 @@
         <div class="faq-list reveal reveal-delay-1">
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              What types of businesses do you work with?
+              What's a "Buy Me a Beer" strategy session?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>Small businesses across industries. If your team spends time on repetitive tasks, lead management, or customer communication, we can help.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              How long does it take to get started?
-              <span class="faq-chevron">+</span>
-            </button>
-            <div class="faq-answer"><p>Most systems are live within one week. We handle everything from design to deployment.</p></div>
+            <div class="faq-answer"><p>It's a real consulting session where I audit your business and show you where AI can help. The price of a beer gets you in the door. You'll walk away with an actionable AI roadmap — no strings attached.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
               Do I need any technical knowledge?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>No. We build it, we run it, we maintain it. You get a dashboard.</p></div>
+            <div class="faq-answer"><p>Zero. That's the whole point. I handle the technology. You tell me about your business, and I translate that into AI systems that work.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              What if I already use other software tools?
+              What types of businesses do you work with?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>We integrate with what you already have. CRMs, calendars, email, payment systems. Nothing gets replaced unless it should be.</p></div>
+            <div class="faq-answer"><p>Any business with repetitive tasks, customer communication, lead management, or operations that eat up your time. Service businesses, creators, agencies, teams of all sizes.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              How is this different from hiring someone?
+              How long does it take to build?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>An AI system doesn't call in sick, forget to follow up, or need training. It runs 24/7 and scales with your business without adding headcount.</p></div>
+            <div class="faq-answer"><p>Simple automations can be live in days. Full AI agent systems typically take 1-2 weeks. We scope everything during the strategy session so there are no surprises.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              What happens if something breaks?
+              What if I just want the consulting, not the build?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>We monitor everything. If an issue comes up, we fix it. You have a dedicated point of contact at all times.</p></div>
+            <div class="faq-answer"><p>That's totally fine. The strategy session gives you a roadmap you can execute yourself or take to another team. No pressure to buy anything beyond the conversation.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              What happens after you build it?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>I monitor, maintain, and optimize your system on an ongoing basis. You get a dashboard to see everything in real time. If something needs adjusting, I handle it.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              What's an OpenClaw setup?
+              <span class="faq-chevron">+</span>
+            </button>
+            <div class="faq-answer"><p>OpenClaw is a full AI agent infrastructure — multiple agents running on schedules, handling content, research, outreach, and operations. Think of it as your own AI team with a command center dashboard. I run one for my own business with 8 agents and 30 automated jobs.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
               Can I see it working before I commit?
               <span class="faq-chevron">+</span>
             </button>
-            <div class="faq-answer"><p>Yes. We walk you through a live demo tailored to your business on the first call.</p></div>
+            <div class="faq-answer"><p>Yes. During the strategy session I can demo live AI systems — including my own OpenClaw dashboard — and show you exactly how they'd work for your business.</p></div>
           </div>
         </div>
       </div>
@@ -706,11 +976,12 @@
   <section class="final-cta" id="contact">
     <div class="container">
       <div class="reveal">
-        <h2 class="section-title">Ready to <em>talk?</em></h2>
-        <p class="section-desc">15 minutes. We'll learn about your business and show you what's possible.</p>
+        <h2 class="section-title">Let's figure out<br>what AI can <em>do for you</em></h2>
+        <p class="section-desc">15 minutes. I'll learn about your business, find the bottlenecks, and show you what's possible.</p>
+        <p class="beer-line">All it costs is a beer.</p>
       </div>
       <div class="reveal reveal-delay-1">
-        <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:1.1rem 2.5rem;">Schedule a Conversation</a>
+        <a href="https://cal.com/danehouse/15min" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:1.1rem 2.5rem;">Book a Strategy Session</a>
       </div>
     </div>
   </section>
@@ -722,7 +993,10 @@
         <img src="assets/logo.png" alt="DaneHouse" style="width:18px;height:18px;object-fit:contain;filter:invert(1);vertical-align:middle;margin-right:8px;">
         <strong>DaneHouse</strong>
       </div>
-      <div class="footer-right">Los Angeles, CA</div>
+      <div class="footer-right">
+        <span>Los Angeles, CA</span>
+        <a href="mailto:kassra@danehouse.io">kassra@danehouse.io</a>
+      </div>
     </div>
   </footer>
 
